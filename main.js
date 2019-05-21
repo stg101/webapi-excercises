@@ -22,9 +22,15 @@ function conversion(data) {
 
 function showStorage() {
   if (localStorage.length > 0) {
-    let dataStorage = localStorage.getItem("dataStorage");
-    dataStorage = JSON.parse(dataStorage);
-    updateDOM("storage", dataStorage);
+    let lastIndex = +localStorage.getItem("lastIndex") - 1;
+    if (lastIndex < 0) {
+      lastIndex = 0;
+    }
+    if (lastIndex != null) {
+      let dataStorage = localStorage.getItem(lastIndex.toString());
+      dataStorage = JSON.parse(dataStorage);
+      updateDOM("storage", dataStorage);
+    }
   }
 }
 
