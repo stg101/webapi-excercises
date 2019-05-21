@@ -7,7 +7,17 @@ function updateDOM(elementId, data) {
 
 function conversion(data) {
   updateDOM("api", data);
-  localStorage.setItem("dataStorage", JSON.stringify(data));
+
+  if (localStorage.getItem("lastIndex") == null) {
+    localStorage.setItem("lastIndex", "1");
+    localStorage.setItem("0", JSON.stringify(data));
+  } else {
+    let index = localStorage.getItem("lastIndex");
+    localStorage.setItem(index, JSON.stringify(data));
+
+    index = +index > 9 ? "0" : (1 + +index).toString();
+    localStorage.setItem("lastIndex", index);
+  }
 }
 
 function showStorage() {
